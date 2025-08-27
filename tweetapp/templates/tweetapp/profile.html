@@ -1,0 +1,38 @@
+{% extends "tweetapp/base.html" %}
+
+{% block content %}
+<h2>{{ user_obj.username }}'s Profile</h2>
+
+<p>
+    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+</p>
+
+<!-- ✅ Profile Picture Section -->
+{% if user_obj.profile.picture %}
+    <img src="{{ user_obj.profile.picture.url }}" alt="Profile Pic" width="150" height="150">
+{% else %}
+    <img src="/static/default.jpg" alt="Default Profile Pic" width="150" height="150">
+{% endif %}
+
+<!-- ✅ Other profile info -->
+<p>Email: {{ user_obj.email }}</p>
+<p>Joined: {{ user_obj.date_joined }}</p>
+
+<!-- ✅ Profile update form -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ pform.as_p }}
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+</form>
+
+<!-- ✅ User Tweets -->
+<h3>Your Tweets</h3>
+<ul>
+    {% for tweet in tweets %}
+        <li><a href="{% url 'tweet_detail' tweet.id %}">{{ tweet.content }}</a></li>
+    {% empty %}
+        <p>No tweets yet.</p>
+    {% endfor %}
+</ul>
+
+{% endblock %}

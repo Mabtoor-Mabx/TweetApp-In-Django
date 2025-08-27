@@ -1,0 +1,39 @@
+{% extends "tweetapp/base.html" %}
+
+{% block title %} Tweet - TweetApp {% endblock %}
+
+{% block content %}
+
+<div class="card bg-dark text-light" >
+    <div class="card-body">
+        <h5 class="card-title">
+            @{{tweet.author.username}}
+        </h5>
+        <p>
+            {{tweet.content}}
+        </p>
+        {% if tweet.image %}
+        
+        <img src="{{tweet.image.url}}" alt="Tweet Image" class="img-fluid rounded">
+        {% endif %}
+        <p class="text-muted">
+            Posted On {{tweet.created_at}}
+        </p>
+
+        {% if user == tweet.author %}
+        
+        <a href="{% url "edit_tweet" tweet.pk %}" class="btn btn-warning"> Edit </a>
+
+        <a href="{% url "delete_tweet" tweet.pk %}" class="btn btn-danger">
+            Delete
+        </a>
+        
+        {% endif %}
+
+
+    </div>
+</div>
+
+
+{% endblock %}
+

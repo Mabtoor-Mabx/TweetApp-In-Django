@@ -1,0 +1,11 @@
+{% extends "tweetapp/base.html" %}
+
+{% block content %}
+<h2>Edit Tweet</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save Changes</button>
+</form>
+<a href="{% url 'tweet_detail' tweet.id %}">Cancel</a>
+{% endblock %}
