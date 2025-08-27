@@ -1,4 +1,4 @@
-# TweetApp in Django
+# 🚀TweetApp in Django
 
 ## 📌 Introduction
 
